@@ -86,7 +86,7 @@ app.post("/api/createinvoice", async (req, res) => {
         let account = await Account.findById(obj.accountId);
         for(let i=0; i<account.balances.length; i++) {
             if(account.balances[i].year === year) {
-              account.balances[i].balance += obj.amount
+              account.balances[i].balance += parseInt(obj.amount)
             }
         }
         await account.save();
