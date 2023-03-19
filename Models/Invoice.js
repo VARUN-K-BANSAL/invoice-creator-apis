@@ -47,10 +47,10 @@ const invSchema = mongoose.Schema({
 });
 
 invSchema.pre("validate", function (next) {
-  const accountArrayTotal = this.accountArray.reduce(
-    (total, account) => total + parseInt(account.amount),
-    0
-  );
+  let accountArrayTotal = 0
+  this.accountArray.forEach(element => {
+    accountArrayTotal += parseInt(element.amount)
+  });
   if (accountArrayTotal !== this.totalAmount) {
     this.invalidate(
       "totalAmount",

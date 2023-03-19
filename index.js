@@ -10,6 +10,15 @@ const Account = require("./Models/Account");
 
 app.use(express.json());
 
+app.get('/getaccounts', async (req, res) => {
+  const accounts = await Account.find();
+  res.status(200).send(accounts)
+})
+app.get('/getinvoices', async (req, res) => {
+  const invoices = await Invoice.find();
+  res.status(200).send(invoices)
+})
+
 app.post("/api/createinvoice", async (req, res) => {
   const { date, customerId, accountArray, totalAmount, invoiceNumber, year } =
     req.body;
